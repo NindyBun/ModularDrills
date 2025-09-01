@@ -1,11 +1,13 @@
 package com.nindybun.modulardrills;
 
 import com.nindybun.modulardrills.data.Generator;
+import com.nindybun.modulardrills.items.DrillHead;
 import com.nindybun.modulardrills.registries.RegComp;
 import com.nindybun.modulardrills.registries.RegItems;
 import com.nindybun.modulardrills.registries.RegTabs;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.*;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -14,10 +16,6 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -71,12 +69,13 @@ public class ModularDrills {
                 ItemProperties.register(RegItems.MODULAR_DRILL.get(), ResourceLocation.fromNamespaceAndPath(ModularDrills.MODID, "drill-head"), (i, l, e, d) -> {
                     float ii = 0f;
                     if (i.has(RegComp.DRILL_HEAD.get())) {
-                        if (i.get(RegComp.DRILL_HEAD.get()).getItem().getDefaultInstance().equals(RegItems.IRON_DRILL_HEAD.get().getDefaultInstance())) {
-                            return 1f;
-                        } else if (i.get(RegComp.DRILL_HEAD.get()).getItem().getDefaultInstance().equals(RegItems.DIAMOND_DRILL_HEAD.get().getDefaultInstance())) {
-                            return 2f;
-                        } else if (i.get(RegComp.DRILL_HEAD.get()).getItem().getDefaultInstance().equals(RegItems.NETHERITE_DRILL_HEAD.get().getDefaultInstance())) {
-                            return 3f;
+                        ItemStack stack = i.get(RegComp.DRILL_HEAD.get()).stack();
+                        if (stack.getItem().equals(RegItems.IRON_DRILL_HEAD.get())) {
+                            return 0.1f;
+                        } else if (stack.getItem().equals(RegItems.DIAMOND_DRILL_HEAD.get())) {
+                            return 0.2f;
+                        } else if (stack.getItem().equals(RegItems.NETHERITE_DRILL_HEAD.get())) {
+                            return 0.3f;
                         }
                     }
                     return ii;

@@ -4,6 +4,7 @@ import com.nindybun.modulardrills.ModularDrills;
 import com.nindybun.modulardrills.registries.RegItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
@@ -34,22 +35,41 @@ public class ItemModelGen extends ItemModelProvider {
         withExistingParent(name, mcLoc("item/generated"))
                 .texture("layer0", ResourceLocation.fromNamespaceAndPath(ModularDrills.MODID, "item/drill-body-item"));
 
-
         name = RegItems.MODULAR_DRILL.getId().getPath();
-        withExistingParent(name, mcLoc("item/generated"))
+        withExistingParent(name, mcLoc("item/handheld"))
                 .texture("layer0", ResourceLocation.fromNamespaceAndPath(ModularDrills.MODID, "item/drill-body"))
+                .transforms()
+                    .transform(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND)
+                        .rotation(0, -90, 115)
+                        .translation(1.13f, 3.2f, 1.13f)
+                    .end()
+                    .transform(ItemDisplayContext.FIRST_PERSON_LEFT_HAND)
+                        .rotation(0, 90, -115)
+                        .translation(1.13f, 3.2f, 1.13f)
+                    .end()
+                    .transform(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND)
+                        .rotation(0, -90, 135)
+                        .translation(0f, 4.0f, 0.5f)
+                    .end()
+                    .transform(ItemDisplayContext.THIRD_PERSON_LEFT_HAND)
+                        .rotation(0, 90, -135)
+                        .translation(0f, 4.0f, 0.5f)
+                    .end()
+                .end()
                 .override()
-                .predicate(ResourceLocation.fromNamespaceAndPath(ModularDrills.MODID, "drill-head"), 1f)
-                .model(withExistingParent(name+"-0", mcLoc("item/generated"))
-                        .texture("layer0", ResourceLocation.fromNamespaceAndPath(ModularDrills.MODID, "item/drill-body-item"))
-                        .texture("layer1", ResourceLocation.fromNamespaceAndPath(ModularDrills.MODID, "item/drill-head-iron")))
-                .predicate(ResourceLocation.fromNamespaceAndPath(ModularDrills.MODID, "drill-head"), 2f)
-                .model(withExistingParent(name+"-0", mcLoc("item/generated"))
-                        .texture("layer0", ResourceLocation.fromNamespaceAndPath(ModularDrills.MODID, "item/drill-body-item"))
-                        .texture("layer1", ResourceLocation.fromNamespaceAndPath(ModularDrills.MODID, "item/drill-head-diamond")))
-                .predicate(ResourceLocation.fromNamespaceAndPath(ModularDrills.MODID, "drill-head"), 3f)
-                .model(withExistingParent(name+"-0", mcLoc("item/generated"))
-                        .texture("layer0", ResourceLocation.fromNamespaceAndPath(ModularDrills.MODID, "item/drill-body-item"))
+                .predicate(ResourceLocation.fromNamespaceAndPath(ModularDrills.MODID, "drill-head"), 0.1f)
+                .model(withExistingParent(name+"-0", ResourceLocation.fromNamespaceAndPath(ModularDrills.MODID, "item/modular-drill"))
+                        .texture("layer0", ResourceLocation.fromNamespaceAndPath(ModularDrills.MODID, "item/drill-body"))
+                        .texture("layer1", ResourceLocation.fromNamespaceAndPath(ModularDrills.MODID, "item/drill-head-iron"))).end()
+                .override()
+                .predicate(ResourceLocation.fromNamespaceAndPath(ModularDrills.MODID, "drill-head"), 0.2f)
+                .model(withExistingParent(name+"-1", ResourceLocation.fromNamespaceAndPath(ModularDrills.MODID, "item/modular-drill"))
+                        .texture("layer0", ResourceLocation.fromNamespaceAndPath(ModularDrills.MODID, "item/drill-body"))
+                        .texture("layer1", ResourceLocation.fromNamespaceAndPath(ModularDrills.MODID, "item/drill-head-diamond"))).end()
+                .override()
+                .predicate(ResourceLocation.fromNamespaceAndPath(ModularDrills.MODID, "drill-head"), 0.3f)
+                .model(withExistingParent(name+"-2", ResourceLocation.fromNamespaceAndPath(ModularDrills.MODID, "item/modular-drill"))
+                        .texture("layer0", ResourceLocation.fromNamespaceAndPath(ModularDrills.MODID, "item/drill-body"))
                         .texture("layer1", ResourceLocation.fromNamespaceAndPath(ModularDrills.MODID, "item/drill-head-netherite")))
                 .end();
 

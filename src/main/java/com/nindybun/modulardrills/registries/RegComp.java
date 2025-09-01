@@ -1,6 +1,7 @@
 package com.nindybun.modulardrills.registries;
 
 import com.nindybun.modulardrills.ModularDrills;
+import com.nindybun.modulardrills.records.DrillHeadRecord;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.ItemStack;
@@ -11,7 +12,7 @@ import java.util.function.Supplier;
 public class RegComp {
     public static final DeferredRegister<DataComponentType<?>> COMPONENTS = DeferredRegister.create(BuiltInRegistries.DATA_COMPONENT_TYPE, ModularDrills.MODID);
 
-    public static final Supplier<DataComponentType<ItemStack>> DRILL_HEAD = COMPONENTS.register("drill-head", () ->
-        DataComponentType.<ItemStack>builder().persistent(ItemStack.CODEC).networkSynchronized(ItemStack.STREAM_CODEC).cacheEncoding().build()
+    public static final Supplier<DataComponentType<DrillHeadRecord>> DRILL_HEAD = COMPONENTS.register("drill-head", () ->
+        DataComponentType.<DrillHeadRecord>builder().persistent(DrillHeadRecord.CODEC).networkSynchronized(DrillHeadRecord.STREAM_CODEC).build()
     );
 }
