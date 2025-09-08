@@ -11,6 +11,18 @@ import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 
 public class ModularDrill extends Item {
+    /*
+    * Drill Parts
+    * - Drill head (mining hardness and durability)
+    * - Engine (fuel engine, electric engine)
+    *   - Advanced Engine (+15% efficiency)
+    * - Cooling pipe/fan (cooling rate)
+    * - Gearbox (torque, speed)
+    */
+    /*
+    * Drill Modifiers
+    * - enchantments
+    */
     public ModularDrill() {
         super(new Properties().stacksTo(1));
     }
